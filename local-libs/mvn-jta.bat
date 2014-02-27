@@ -1,0 +1,1 @@
+mvn install:install-file -Dfile=jta-1.0.1b.jar -DgroupId=jta -DartifactId=jta -Dversion=1.0.1b -Dpackaging=jar  -DgeneratePom=true -DcreateChecksum=true
