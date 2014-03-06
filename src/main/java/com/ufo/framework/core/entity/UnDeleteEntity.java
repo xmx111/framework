@@ -1,4 +1,4 @@
-package com.ufo.framework.core.security.entity;
+package com.ufo.framework.core.entity;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
