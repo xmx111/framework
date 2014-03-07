@@ -3,15 +3,17 @@ package com.ufo.framework.core.entity;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
-/** 
-* 类名称：UndeleteEntity 
-* 类描述：非物理删除的实体数据层 
-* 
-* 创建人：Duzj
-* 创建时间：2012-12-23 上午10:36:58 
-* @version 
-* 
-*/
+/**
+ * 
+ * 类名称：UnDeleteEntity 
+ * 类描述： 非物理删除的实体数据层 
+ * 
+ * 
+ * 创建人：khe
+ * 创建时间：2014-3-6 上午9:49:58 
+ * @version 0.1
+ *
+ */
 @MappedSuperclass
 public class UnDeleteEntity extends IdEntity {
 
