@@ -1,5 +1,6 @@
 package com.ufo.framework.core.entity;
 
+
 /**
  * 
  * 类名称：IUserEntity 

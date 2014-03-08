@@ -72,12 +72,7 @@
     <authentication-manager alias="authenticationManager">
         <authentication-provider ref="daoAuthenticationProvider" />
     </authentication-manager>
-
-    <!--加密 
-    <b:bean id="saltSource" class="org.springframework.security.authentication.dao.ReflectionSaltSource">
-        <b:property name="userPropertyToUse" value="loginName" />
-    </b:bean>
-    -->
+    
     <!-- 用户的密码加密或解密 -->
     <b:bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" />
     <b:bean id="daoAuthenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
