@@ -20,7 +20,7 @@ import javax.persistence.MappedSuperclass;
  */
 //JPA 基类的标识
 @MappedSuperclass
-public abstract class IdEntity {
+public abstract class IdEntity implements IIdEntity {
 
     /**
      * id PK

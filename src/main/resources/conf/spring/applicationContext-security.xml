@@ -5,8 +5,8 @@
 	 http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
 	 http://www.springframework.org/schema/context 
 	 http://www.springframework.org/schema/context/spring-context-3.2.xsd
-    http://www.springframework.org/schema/security 
-    http://www.springframework.org/schema/security/spring-security-3.1.xsd"
+     http://www.springframework.org/schema/security 
+     http://www.springframework.org/schema/security/spring-security-3.2.xsd"
     default-autowire="byName" default-lazy-init="true">
 
     <!-- 扫描控制层 -->
@@ -35,25 +35,22 @@
         <!-- 登陆Form -->
         <form-login login-page="/login.htm" authentication-success-handler-ref="loginSuccessHandler"
             authentication-failure-handler-ref="loginFailureHandler" />
-
-
-        <!-- 自定义访问控制 -->
+		
+		<!-- 自定义访问控制 -->
         <access-denied-handler ref="accessDeniedHandler" />
-
-        <!-- 检测失效的sessionId,超时时定位到另外一个URL
-            <custom-filter ref="sessionFilter" before="SESSION_MANAGEMENT_FILTER" />
-        -->
+        
         <!-- 增加一个自定义的filter，放在FILTER_SECURITY_INTERCEPTOR之前， 实现用户、角色、权限、资源的数据库管理。 -->
         <custom-filter ref="securityFilter" before="FILTER_SECURITY_INTERCEPTOR" />
+        
         <!-- 退出登陆 -->
         <logout logout-success-url="/index.htm" />
     </http>
     <!-- 定义登陆成功,或失败处理,此处记录登陆日志 -->
-    <b:bean id="loginSuccessHandler" class="com.se.core.security.LoginSuccessHandler">
+    <b:bean id="loginSuccessHandler" class="com.ufo.framework.core.security.LoginSuccessHandler">
         <b:property name="defaultTargetUrl" value="/index.htm" />
         <b:property name="targetUrlParameter" value="redirect"/>
     </b:bean>
-    <b:bean id="loginFailureHandler" class="com.se.core.security.LoginFailureHandler">
+    <b:bean id="loginFailureHandler" class="com.ufo.framework.core.security.LoginFailureHandler">
         <b:property name="defaultFailureUrl" value="/login.htm?error=true" />
     </b:bean>
 
@@ -65,9 +62,9 @@
     </b:bean>
 
     <!-- 登陆跳转 -->
-    <b:bean id="loginUrlPoint" class="com.se.core.security.LoginUrlEntryPoint" />
+    <b:bean id="loginUrlPoint" class="com.ufo.framework.core.security.LoginUrlEntryPoint" />
     <!-- 无权访问反回json -->
-    <b:bean id="accessDeniedHandler" class="com.se.core.security.AccessDeniedHandlerImpl" />
+    <b:bean id="accessDeniedHandler" class="com.ufo.framework.core.security.AccessDeniedHandler" />
     <!-- 认证管理器 -->
     <authentication-manager alias="authenticationManager">
         <authentication-provider ref="daoAuthenticationProvider" />
@@ -77,19 +74,16 @@
     <b:bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" />
     <b:bean id="daoAuthenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
         <b:property name="userDetailsService" ref="userDetailsManager" />
-        <!-- <b:property name="userCache" ref="userCache" /> -->
-        <!-- <b:property name="saltSource" ref="saltSource" /> -->
     </b:bean>
 
-
     <!-- 访问决策器，决定某个用户具有的角色，是否有足够的权限去访问某个资源。 -->
-    <b:bean id="accessDecisionManager" class="com.se.core.security.AccessDecisionManager" />
+    <b:bean id="accessDecisionManager" class="com.ufo.framework.core.security.AccessDecisionManager" />
 
     <!-- 资源源数据定义，将所有的资源和权限对应关系建立起来，即定义某一资源可以被哪些角色去访问。 -->
-    <b:bean id="securityMetadataSource" class="com.se.core.security.SecurityMetadataSourceService"></b:bean>
+    <b:bean id="securityMetadataSource" class="com.ufo.framework.core.security.SecurityMetadataSourceService"></b:bean>
 
     <!-- 用户详细信息管理：数据源、用户缓存（通过数据库管理用户、角色、权限、资源）。 -->
-    <b:bean id="userDetailsManager" class="com.se.core.security.UserDetailsService" />
+    <b:bean id="userDetailsManager" class="com.ufo.framework.core.security.UserDetailsService" />
 
 
 

@@ -12,15 +12,15 @@
         <property name="maxInMemorySize" value="1024" />
     </bean>
 
-    <!-- ajax中文乱码 
+    <!-- ajax中文乱码，启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
         <property name="messageConverters">
             <list>
                 <bean class="org.springframework.http.converter.StringHttpMessageConverter">
                     <constructor-arg index="0" value="UTF-8" />
                 </bean>
-                <bean class="com.ufo.framework.web.converter.MappingJsonpHttpMessageConverter">
-                    <!-- 配置过滤空值字段 ->
+                <bean class="com.ufo.framework.core.web.converter.MappingJson2HttpMessageConverter">
+                    <!-- 配置过滤空值字段 -->
                     <property name="objectMapper">
                         <bean class="com.fasterxml.jackson.databind.ObjectMapper">
                             <property name="serializationInclusion">
@@ -32,7 +32,7 @@
                 <bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
             </list>
         </property>
-    </bean>-->
+    </bean>
     
     <!-- 启用@AspectJ支持 -->
     <bean class="org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator" />

@@ -1,4 +1,4 @@
-package com.ufo.framework.core.security.entity;
+package com.ufo.framework.core.entity;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
@@ -18,8 +19,6 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.ForeignKey;
 
-import com.ufo.framework.core.entity.IUserEntity;
-import com.ufo.framework.core.entity.UnDeleteEntity;
 
 /**
  * 
@@ -34,12 +33,7 @@ import com.ufo.framework.core.entity.UnDeleteEntity;
  */
 @Entity
 @Table(name = "ufo_sys_admin")
-public class Admin extends UnDeleteEntity implements Serializable, IUserEntity {
-
-    /** 
-     * serialVersionUID 
-     */ 
-    private static final long serialVersionUID = -8835641458116941984L;
+public abstract class Admin extends UnDeleteEntity implements IUserEntity {
     
     /** 
      * loginName 登陆名
@@ -86,7 +80,7 @@ public class Admin extends UnDeleteEntity implements Serializable, IUserEntity {
       */
      private Organization organization;
 
-     @Column(name = "login_name", length = 64)
+     @Column(name = "login_name", length = 64, unique = true)
      public String getLoginName() {
          return loginName;
      }
@@ -165,7 +159,7 @@ public class Admin extends UnDeleteEntity implements Serializable, IUserEntity {
      }
 
      @ManyToOne(fetch = FetchType.LAZY)
-     @JoinColumn(name = "inst_id")
+     @JoinColumn(name = "orga_id")
      @ForeignKey(name = "fk_admin_organization")
      public Organization getOrganization() {
          return organization;

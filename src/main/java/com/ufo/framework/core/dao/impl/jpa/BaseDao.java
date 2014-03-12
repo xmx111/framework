@@ -5,6 +5,7 @@ import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.apache.commons.lang.StringUtils;
@@ -37,8 +38,13 @@ public abstract class BaseDao<T extends IIdEntity> implements IBaseDao<T>  {
     protected final Logger logger = LoggerFactory.getLogger(getClass());
 
     protected Class<T> clz;
-
-    protected abstract EntityManager getEntityManager();
+    
+    @PersistenceContext
+    protected EntityManager entityManager;
+    
+    protected EntityManager getEntityManager() {
+        return entityManager;
+    }
 
     /*
      * Construct method

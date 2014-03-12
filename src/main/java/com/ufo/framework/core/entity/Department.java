@@ -1,4 +1,4 @@
-package com.ufo.framework.core.security.entity;
+package com.ufo.framework.core.entity;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -7,15 +7,15 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.ForeignKey;
 
-import com.ufo.framework.core.entity.UnDeleteEntity;
 
 /**
  * 
@@ -30,12 +30,7 @@ import com.ufo.framework.core.entity.UnDeleteEntity;
  */
 @Entity
 @Table(name = "ufo_sys_department")
-public class Department extends UnDeleteEntity implements java.io.Serializable {
-
-    /** 
-     * serialVersionUID 
-     */ 
-    private static final long serialVersionUID = -6202437774475031407L;
+public abstract class Department extends UnDeleteEntity {
     
     /** 
      * institution 关联机构
@@ -97,8 +92,8 @@ public class Department extends UnDeleteEntity implements java.io.Serializable {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "inst_id")
-    @ForeignKey(name = "fk_dept_institution")
+    @JoinColumn(name = "orga_id")
+    @ForeignKey(name = "fk_dept_organization")
     public Organization getOrganization() {
         return organization;
     }
@@ -107,7 +102,7 @@ public class Department extends UnDeleteEntity implements java.io.Serializable {
         this.organization = organization;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "departments")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "department")
     @Fetch(FetchMode.SUBSELECT)
     public Set<Admin> getAdmins() {
         return admins;

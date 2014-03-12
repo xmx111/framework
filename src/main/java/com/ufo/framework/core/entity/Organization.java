@@ -1,17 +1,21 @@
-package com.ufo.framework.core.security.entity;
+package com.ufo.framework.core.entity;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.ForeignKey;
 
-import com.ufo.framework.core.entity.UnDeleteEntity;
 
 /**
  * 
@@ -26,12 +30,7 @@ import com.ufo.framework.core.entity.UnDeleteEntity;
  */
 @Entity
 @Table(name = "ufo_sys_organization")
-public class Organization extends UnDeleteEntity implements Serializable {
-
-    /** 
-     * serialVersionUID 
-     */ 
-    private static final long serialVersionUID = -6235286123589761748L;
+public abstract class Organization extends UnDeleteEntity {
     
     /**
      * code 机构编码
@@ -64,19 +63,24 @@ public class Organization extends UnDeleteEntity implements Serializable {
     private String website;
     
     /**
-     * 描述
+     * description 描述
      */
     private String description;
     
     /**
-     * 机构类型:0集团,1俱乐部,2球场,3中介机构
+     * type 机构类型:0集团,1俱乐部,2球场,3中介机构
      */
     private Integer type;
     
     /**
-     * 上级机构,自关联
+     * parent 上级机构,自关联
      */
     private Organization parent;
+    
+    /**
+     * dept 部门列表
+     */
+    private Set<Department> departments;
     
     @Column(length = 20)
     public String getCode() {
@@ -159,6 +163,16 @@ public class Organization extends UnDeleteEntity implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization")
+    @Fetch(FetchMode.SUBSELECT)
+    public Set<Department> getDepartments() {
+        return departments;
+    }
+
+    public void setDepartments(Set<Department> departments) {
+        this.departments = departments;
     }
     
 }

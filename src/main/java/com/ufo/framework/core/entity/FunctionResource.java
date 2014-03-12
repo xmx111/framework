@@ -1,4 +1,4 @@
-package com.ufo.framework.core.security.entity;
+package com.ufo.framework.core.entity;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
@@ -19,7 +20,6 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.ForeignKey;
 
-import com.ufo.framework.core.entity.IdEntity;
 
 /**
  * 
@@ -34,12 +34,7 @@ import com.ufo.framework.core.entity.IdEntity;
  */
 @Entity
 @Table(name = "ufo_sys_function_resource")
-public class FunctionResource extends IdEntity implements java.io.Serializable {
-
-    /** 
-     *serialVersionUID 
-     */ 
-    private static final long serialVersionUID = 991410298216580799L;
+public abstract class FunctionResource extends IdEntity {
 
     /** 
      * code 编码

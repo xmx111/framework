@@ -1,4 +1,4 @@
-package com.ufo.framework.core.security.entity;
+package com.ufo.framework.core.entity;
 
 import java.util.Set;
 
@@ -9,13 +9,13 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.ForeignKey;
 
-import com.ufo.framework.core.entity.UnDeleteEntity;
 
 /**
  * 
@@ -30,12 +30,7 @@ import com.ufo.framework.core.entity.UnDeleteEntity;
  */
 @Entity
 @Table(name = "ufo_sys_role")
-public class Role extends UnDeleteEntity implements java.io.Serializable {
-
-    /** 
-     *serialVersionUID 
-     */ 
-    private static final long serialVersionUID = 2709385266871283141L;
+public abstract class Role extends UnDeleteEntity {
 
     /** 
      * name 名称
