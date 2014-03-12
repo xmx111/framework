@@ -342,18 +342,11 @@
   	<build>
     	<finalName>framework</finalName>
         <plugins>
-            <!-- eclipse插件可以下载jar包源码 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-eclipse-plugin</artifactId>
-                <version>2.9</version>
-                <configuration>
-                    <wtpversion>2.0</wtpversion>
-                    <downloadSources>true</downloadSources>
-                    <downloadJavadocs>true</downloadJavadocs>
-                </configuration>
-            </plugin>
-            <!-- 配置jdk和jvm -->
+            <!-- 
+            compiler插件能解决2个问题：
+			第一：指定JDK版本：maven 2.1默认使用jdk 1.3来编译，这个版本不支持注解，compiler插件可以指定JDK版本为1.6，解决这个问题。
+			第二：指定项目编码：windows平台默认使用GBK编码，如果工程编码为utf8，也需要在compiler插件中指出，否则按GBK编码，也会出问题。 
+			-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -365,16 +358,36 @@
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
-            <!-- 打包配置 -->
+            <!-- 生成源码包插件 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>2.1.1</version>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
             </plugin>
-            <!-- 配置jetty -->
+            <!-- 
+            	1、自定义JAR文件中使用注解扫描问题Spring注解自动扫描Jar中的类，
+            	以前在eclipse下，打包时需要选择Add directory entries选项，
+            	否则spring是不会扫描该jar的 
+            -->
             <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <archive>
+                        <index>false</index>
+                        <manifest>
+                            <addClasspath>false</addClasspath>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                        </manifest>
+                    </archive>
+                    <excludes>
+                        <exclude>*.xml</exclude>
+                        <exclude>com/ufo/test/**</exclude>
+                        <exclude>conf/properties/**</exclude>
+                    </excludes>
+                </configuration>
             </plugin>
         </plugins>
   	</build>

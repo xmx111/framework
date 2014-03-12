@@ -1,0 +1,1 @@
+mvn install:install-file  -DgroupId=com.ufo -DartifactId=framework -Dversion=0.0.1-SNAPSHOT -Dfile=target/framework.jar -Dpackaging=jar -DgeneratePom=true
