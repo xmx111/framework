@@ -63,7 +63,7 @@
 
     <!-- 登陆跳转 -->
     <b:bean id="loginUrlPoint" class="com.ufo.framework.core.security.LoginUrlEntryPoint" />
-    <!-- 无权访问反回json -->
+    <!-- 无权访问返回json -->
     <b:bean id="accessDeniedHandler" class="com.ufo.framework.core.security.AccessDeniedHandler" />
     <!-- 认证管理器 -->
     <authentication-manager alias="authenticationManager">

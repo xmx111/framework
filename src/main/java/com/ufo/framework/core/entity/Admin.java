@@ -33,7 +33,7 @@ import org.hibernate.annotations.ForeignKey;
  */
 @Entity
 @Table(name = "ufo_sys_admin")
-public abstract class Admin extends UnDeleteEntity implements IUserEntity {
+public class Admin extends UnDeleteEntity implements IUserEntity {
     
     /** 
      * loginName 登陆名

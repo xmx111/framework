@@ -385,7 +385,7 @@
                     <excludes>
                         <exclude>*.xml</exclude>
                         <exclude>com/ufo/test/**</exclude>
-                        <exclude>conf/properties/**</exclude>
+                        <exclude>conf/**</exclude>
                     </excludes>
                 </configuration>
             </plugin>

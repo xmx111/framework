@@ -30,7 +30,7 @@ import org.hibernate.annotations.ForeignKey;
  */
 @Entity
 @Table(name = "ufo_sys_organization")
-public abstract class Organization extends UnDeleteEntity {
+public class Organization extends UnDeleteEntity {
     
     /**
      * code 机构编码

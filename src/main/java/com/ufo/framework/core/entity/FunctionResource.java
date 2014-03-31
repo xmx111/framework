@@ -34,7 +34,7 @@ import org.hibernate.annotations.ForeignKey;
  */
 @Entity
 @Table(name = "ufo_sys_function_resource")
-public abstract class FunctionResource extends IdEntity {
+public class FunctionResource extends IdEntity {
 
     /** 
      * code 编码
