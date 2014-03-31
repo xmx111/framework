@@ -109,4 +109,5 @@ public abstract class BaseService<T extends IIdDto, M extends IIdEntity> impleme
     protected abstract M getNewModel();
     
     protected abstract IBaseDao<M> getBaseDao();
+    
 }
